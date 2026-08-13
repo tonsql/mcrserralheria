@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111315">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy"
+content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://ipglkwryabspwrbrezlx.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
+<title>Admin | MCR Serralheria</title>
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<style>
+:root{
+  --bg:#101315;--panel:#181c1f;--panel2:#1d2225;--line:#343b3f;
+  --text:#f4f5f6;--muted:#aeb7bc;--orange:#ff7a00;--yellow:#ffb000;
+  --green:#1fbf73;--red:#ff6666;--purple:#7158e2;--white:#fff;
+  --light:#eef1f3;--ink:#1e2529;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
+body{background:#0f1214;color:var(--text)}
+button,input,select,textarea{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+a{color:inherit}
+button{cursor:pointer}
+.login-view{
+  min-height:100vh;display:grid;place-items:center;padding:32px;
+  background:
+    radial-gradient(circle at 86% 12%,rgba(255,122,0,.16),transparent 30%),
+    linear-gradient(135deg,#0f1214,#171a1d 62%,#121416);
+}
+.login-card{
+  width:min(1180px,calc(100vw - 64px));min-height:630px;
+  display:grid;grid-template-columns:minmax(0,1.12fr) minmax(390px,.88fr);
+  border:1px solid var(--line);background:var(--panel);overflow:hidden;
+  box-shadow:0 38px 100px rgba(0,0,0,.48);
+}
+.login-intro{
+  position:relative;padding:56px 60px 48px;display:flex;flex-direction:column;
+  justify-content:center;border-right:1px solid var(--line);
+  background:
+    linear-gradient(145deg,rgba(255,122,0,.075),transparent 34%),
+    #15191b;
+}
+.login-intro:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--orange),var(--yellow),transparent 84%)}
+.logo{width:210px;max-width:55%;margin:0 0 54px;display:block}
+.logo img{width:100%;display:block}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--yellow);font-size:.75rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.eyebrow:before{content:"";width:30px;height:2px;background:linear-gradient(90deg,var(--orange),transparent)}
+.login-intro h1{font-size:clamp(3.4rem,5.5vw,5.8rem);letter-spacing:-.055em;line-height:.92;margin:18px 0 24px}
+.login-intro p{max-width:600px;color:var(--muted);font-size:1.02rem;line-height:1.7;margin:0}
+.feature-row{display:flex;flex-wrap:wrap;gap:10px 22px;border-top:1px solid #2c3337;margin-top:38px;padding-top:28px}
+.feature-row span{font-size:.82rem;font-weight:750;color:#e0e4e6}
+.feature-row span:before{content:"•";color:var(--yellow);margin-right:8px}
+.back-link{margin-top:42px;color:#aeb7bc;text-decoration:none;font-size:.82rem;width:max-content}
+.back-link:hover{color:var(--yellow)}
+.login-side{padding:58px 54px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(180deg,#1b1f22,#171a1d)}
+.login-side small{color:var(--yellow);font-weight:900;letter-spacing:.14em}
+.login-side h2{font-size:2.05rem;margin:8px 0 10px}
+.login-side .sub{color:var(--muted);line-height:1.55;margin:0 0 22px}
+.connection{
+  display:flex;align-items:center;gap:9px;padding:11px 13px;margin:0 0 20px;
+  border:1px solid #343b3f;background:#121619;color:#bfc7cb;font-size:.77rem
+}
+.connection .dot{width:9px;height:9px;border-radius:50%;background:#7b8489;box-shadow:0 0 0 4px rgba(123,132,137,.08)}
+.connection.ok{border-color:rgba(31,191,115,.35);color:#d8f6e7}
+.connection.ok .dot{background:var(--green);box-shadow:0 0 14px rgba(31,191,115,.55)}
+.connection.error{border-color:rgba(255,102,102,.4);color:#ffd4d4}
+.connection.error .dot{background:var(--red)}
+.auth-form{display:grid;gap:11px}
+.auth-form label{font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.auth-form input{
+  width:100%;min-height:54px;padding:0 14px;background:#0f1315;color:#fff;
+  border:1px solid #3c4448;outline:none
+}
+.auth-form input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,122,0,.10)}
+.password-field{position:relative}
+.password-field input{padding-right:100px}
+.password-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--yellow);font-size:.72rem;font-weight:900}
+.primary{
+  min-height:54px;border:0;background:linear-gradient(90deg,var(--orange),var(--yellow));
+  color:#14100b;font-weight:900;letter-spacing:.08em;text-transform:uppercase
+}
+.primary:hover{filter:brightness(1.06)}
+.primary:disabled{opacity:.6;cursor:not-allowed}
+.login-message{min-height:24px;margin:3px 0 0;font-size:.8rem;color:#c5cdd1;line-height:1.4}
+.login-message.error{color:#ff9a9a}.login-message.ok{color:#8fe3b9}
+.security-note{margin-top:18px;color:#818c91;font-size:.72rem;line-height:1.5}
+.recovery-link{
+  border:0;background:transparent;color:#ffb000;padding:2px 0;margin-top:4px;
+  width:max-content;font-size:.78rem;font-weight:800;text-decoration:underline;text-underline-offset:3px
+}
+.recovery-box{display:none}
+.recovery-box.active{display:block}
+.recovery-box h2{margin-bottom:8px}
+.recovery-info{
+  padding:12px 13px;margin:0 0 18px;border:1px solid rgba(255,176,0,.35);
+  background:#211b13;color:#ffd98a;font-size:.78rem;line-height:1.5
+}
+
+/* APP */
+.app{min-height:100vh;background:var(--light);color:var(--ink)}
+.sidebar{
+  position:fixed;inset:0 auto 0 0;width:270px;background:#15191b;color:#eef1f2;border-right:1px solid #2d3336;
+  display:flex;flex-direction:column;z-index:20;transition:.22s ease
+}
+.sidebar.collapsed{width:82px}
+.side-top{height:92px;display:grid;grid-template-columns:42px 1fr;align-items:center;gap:12px;padding:0 20px;border-bottom:1px solid #2b3134}
+.side-toggle{width:42px;height:42px;border:0;background:#202528;color:#fff;font-size:1.15rem}
+.side-brand img{width:150px;display:block}
+.sidebar.collapsed .side-brand{display:none}
+.nav{display:grid;gap:5px;padding:18px 12px}
+.nav button,.side-footer button,.side-footer a{
+  min-height:48px;border:0;background:transparent;color:#cbd1d4;text-decoration:none;
+  display:grid;grid-template-columns:34px 1fr;align-items:center;text-align:left;padding:0 12px
+}
+.nav button:hover,.nav button.active,.side-footer button:hover,.side-footer a:hover{background:#23292c;color:#fff}
+.nav button.active{border-left:3px solid var(--orange)}
+.nav b,.side-footer b{font-size:.82rem}
+.sidebar.collapsed .nav b,.sidebar.collapsed .side-footer b{display:none}
+.sidebar.collapsed .nav button,.sidebar.collapsed .side-footer button,.sidebar.collapsed .side-footer a{grid-template-columns:1fr;text-align:center}
+.side-footer{margin-top:auto;padding:12px;border-top:1px solid #2b3134}
+.shell{margin-left:270px;min-height:100vh;transition:.22s ease}
+.sidebar.collapsed+.shell{margin-left:82px}
+.topbar{
+  min-height:88px;background:#fff;border-bottom:1px solid #dce1e4;padding:16px 28px;display:flex;align-items:center;gap:18px;
+  position:sticky;top:0;z-index:10
+}
+.mobile-menu{display:none;border:0;background:#1e2529;color:#fff;width:42px;height:42px}
+.topbar small{color:#808a8f;text-transform:uppercase;font-size:.64rem;font-weight:900;letter-spacing:.1em}
+.topbar h1{margin:4px 0 0;font-size:1.35rem}
+.account{margin-left:auto;display:flex;align-items:center;gap:8px;background:#f2f4f5;border:1px solid #dce1e4;padding:9px 12px;font-size:.76rem}
+.account .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.content{padding:26px 28px 54px}
+.view{display:none}.view.active{display:block}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.stat{background:#fff;border:1px solid #dfe4e7;border-top:3px solid var(--orange);padding:20px}
+.stat small{display:block;color:#788287;font-size:.66rem;text-transform:uppercase;font-weight:900;letter-spacing:.08em}
+.stat strong{display:block;font-size:2.25rem;margin:9px 0 4px}
+.stat span{font-size:.73rem;color:#879095}
+.grid2{display:grid;grid-template-columns:1.12fr .88fr;gap:18px}
+.panel{background:#fff;border:1px solid #dde2e5;padding:20px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.panel-head small{color:#80898e;text-transform:uppercase;font-size:.64rem;font-weight:900;letter-spacing:.09em}
+.panel-head h2{margin:3px 0 0;font-size:1.1rem}
+.toolbar{display:flex;gap:12px;justify-content:space-between;margin-bottom:16px}
+.search{flex:1;max-width:540px}
+.search input{width:100%;height:46px;padding:0 13px;border:1px solid #d2d8db;background:#fff}
+.btn{border:1px solid #cfd5d8;background:#fff;padding:11px 15px;font-weight:800}
+.btn.orange{border:0;background:linear-gradient(90deg,var(--orange),var(--yellow));color:#15110c}
+.btn.danger{border-color:#f0b4b4;color:#bb2929}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid label{display:grid;gap:6px;font-size:.72rem;font-weight:900;text-transform:uppercase}
+.form-grid input,.form-grid select,.form-grid textarea{width:100%;border:1px solid #d2d8db;padding:12px;background:#fff;color:#222}
+.form-grid textarea{min-height:100px;resize:vertical}
+.full{grid-column:1/-1}
+.actions{display:flex;flex-wrap:wrap;gap:9px}
+.list{display:grid;gap:9px}
+.row-card{border:1px solid #e0e4e6;background:#fbfcfc;padding:14px;display:grid;gap:10px}
+.row-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.row-top h3{margin:0;font-size:.94rem}.row-top p{margin:3px 0 0;color:#707a7f;font-size:.75rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:.71rem;color:#747e83}
+.tag{display:inline-flex;align-items:center;padding:5px 8px;font-size:.65rem;font-weight:900}
+.tag.progress{background:#fff0d4;color:#a65a00}.tag.paint{background:#ece9ff;color:#5d45c5}.tag.done{background:#ddf7e9;color:#13834d}
+.empty{padding:28px;text-align:center;color:#7d878c;border:1px dashed #d4dadd;background:#fafbfb}
+.process-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.process-list li{display:grid;grid-template-columns:32px 1fr auto;gap:9px;align-items:center;padding:8px 0;border-bottom:1px solid #eceff0}
+.process-list li:last-child{border-bottom:0}
+.process-list>li>span{color:#bd5700;font-weight:900;font-size:.7rem}
+.process-list strong{font-size:.74rem}.process-list small{display:block;color:#7f898e;font-size:.65rem;margin-top:2px}
+.process-list b{font-size:.64rem;background:#f0f2f3;padding:4px 6px}
+.order-stages{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.stage{padding:8px 6px;border:1px solid #dde2e4;background:#f7f8f8;text-align:center;font-size:.61rem}
+.stage.completed{background:#def6e9;border-color:#9edbbd;color:#126f43}
+.stage.current{background:#fff0d9;border-color:#ffc56f;color:#9c5500}
+.global{position:fixed;right:22px;bottom:22px;z-index:50;max-width:420px;padding:12px 14px;background:#202629;color:#fff;box-shadow:0 12px 35px rgba(0,0,0,.2);font-size:.78rem;display:none}
+.global.show{display:block}.global.error{background:#8e2929}.global.ok{background:#137547}
+.settings{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.settings .wide{grid-column:1/-1}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}.grid2,.settings{grid-template-columns:1fr}.settings .wide{grid-column:auto}}
+@media(max-width:820px){
+  .login-view{padding:15px}
+  .login-card{width:min(560px,100%);min-height:auto;grid-template-columns:1fr}
+  .login-intro{padding:30px 25px 25px;border-right:0;border-bottom:1px solid var(--line)}
+  .logo{width:160px;margin-bottom:24px}.login-intro h1{font-size:2.8rem;margin:10px 0 12px}
+  .feature-row,.back-link{display:none}.login-side{padding:30px 25px 34px}.login-side h2{font-size:1.65rem}
+  .sidebar{transform:translateX(-105%);width:270px}.sidebar.mobile{transform:translateX(0)}.sidebar.collapsed{width:270px}
+  .sidebar.collapsed .side-brand{display:block}.sidebar.collapsed .nav b,.sidebar.collapsed .side-footer b{display:block}
+  .sidebar.collapsed .nav button,.sidebar.collapsed .side-footer button,.sidebar.collapsed .side-footer a{grid-template-columns:34px 1fr;text-align:left}
+  .shell,.sidebar.collapsed+.shell{margin-left:0}.mobile-menu{display:block}.content{padding:18px 14px 44px}
+  .account{display:none}.stats{grid-template-columns:1fr 1fr;gap:9px}.toolbar{flex-direction:column}.search{max-width:none}
+  .form-grid{grid-template-columns:1fr}.full{grid-column:auto}.order-stages{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:470px){.stats{grid-template-columns:1fr}.login-intro h1{font-size:2.35rem}.login-side{padding:26px 20px}.login-intro{padding:26px 20px 22px}}
+</style>
+</head>
+<body>
+
+<section class="login-view" id="loginView">
+  <div class="login-card">
+    <div class="login-intro">
+      <a class="logo" href="../index.html"><img src="../img/logo-mcr.svg" alt="MCR Serralheria"></a>
+      <span class="eyebrow">Área de administração</span>
+      <h1>Painel MCR</h1>
+      <p>Gerencie clientes, códigos de rastreio e o andamento das ordens de serviço em um único painel.</p>
+      <div class="feature-row">
+        <span>Clientes e contatos</span><span>Ordens de serviço</span><span>Acompanhamento por etapas</span>
+      </div>
+      <a class="back-link" href="../index.html">← Voltar ao site principal</a>
+    </div>
+    <div class="login-side">
+      <small>ACESSO RESTRITO</small>
+      <h2>Entrar no painel</h2>
+      <p class="sub">Use o usuário administrativo e a senha cadastrada no Supabase.</p>
+      <div id="connection" class="connection"><span class="dot"></span><span id="connectionText">Verificando conexão com o banco...</span></div>
+      <div id="normalLogin">
+        <form class="auth-form" id="loginForm">
+          <label for="username">Usuário</label>
+          <input id="username" autocomplete="username" value="admin" maxlength="32" required>
+          <label for="password">Senha</label>
+          <div class="password-field">
+            <input id="password" type="password" autocomplete="current-password" minlength="8" required>
+            <button class="password-toggle" type="button" id="togglePassword">MOSTRAR</button>
+          </div>
+          <button id="loginButton" class="primary" type="submit">ENTRAR</button>
+          <button id="forgotPassword" class="recovery-link" type="button">Esqueci minha senha</button>
+          <p id="loginMessage" class="login-message" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div id="recoveryBox" class="recovery-box">
+        <small>RECUPERAÇÃO DE ACESSO</small>
+        <h2>Definir nova senha</h2>
+        <p class="sub">Crie uma nova senha para o administrador da MCR.</p>
+        <div id="recoveryInfo" class="recovery-info">Link de recuperação validado.</div>
+        <form class="auth-form" id="recoveryForm">
+          <label for="recoveryPassword">Nova senha</label>
+          <input id="recoveryPassword" type="password" autocomplete="new-password" minlength="8" required>
+          <label for="recoveryConfirm">Confirmar nova senha</label>
+          <input id="recoveryConfirm" type="password" autocomplete="new-password" minlength="8" required>
+          <button id="recoveryButton" class="primary" type="submit">SALVAR NOVA SENHA</button>
+          <p id="recoveryMessage" class="login-message" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="security-note">Autenticação feita pelo Supabase. A chave presente nesta página é uma chave pública de navegador; as permissões dos dados continuam protegidas pelas políticas RLS.</div>
+    </div>
+  </div>
+</section>
+
+<section class="app" id="app" hidden>
+  <aside class="sidebar" id="sidebar">
+    <div class="side-top">
+      <button class="side-toggle" id="sideToggle" type="button" aria-label="Recolher menu">☰</button>
+      <a class="side-brand" href="../index.html"><img src="../img/logo-mcr.svg" alt="MCR"></a>
+    </div>
+    <nav class="nav">
+      <button class="active" data-view="overview"><span>⌂</span><b>Início</b></button>
+      <button data-view="clients"><span>👥</span><b>Clientes</b></button>
+      <button data-view="orders"><span>📦</span><b>Pedidos / Ordens</b></button>
+      <button data-view="settings"><span>⚙</span><b>Configurações</b></button>
+    </nav>
+    <div class="side-footer">
+      <a href="../index.html"><span>↗</span><b>Site principal</b></a>
+      <button id="logoutSide"><span>⏻</span><b>Sair</b></button>
+    </div>
+  </aside>
+  <div class="shell">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu">☰</button>
+      <div><small>Painel administrativo</small><h1 id="viewTitle">Visão Geral</h1></div>
+      <div class="account"><span class="dot"></span><strong id="currentUser">admin</strong></div>
+    </header>
+
+    <main class="content">
+      <section class="view active" data-panel="overview">
+        <div class="stats">
+          <article class="stat"><small>Clientes cadastrados</small><strong id="statClients">0</strong><span>Base de clientes</span></article>
+          <article class="stat"><small>Pedidos em andamento</small><strong id="statActive">0</strong><span>Ordens não concluídas</span></article>
+          <article class="stat"><small>Em soldagem</small><strong id="statWeld">0</strong><span>Montagem e solda</span></article>
+          <article class="stat"><small>Pintura / acabamento</small><strong id="statPaint">0</strong><span>Etapa de acabamento</span></article>
+        </div>
+        <div class="grid2">
+          <section class="panel"><div class="panel-head"><div><small>Últimas atualizações</small><h2>Pedidos recentes</h2></div></div><div id="recentOrders" class="list"></div></section>
+          <section class="panel"><div class="panel-head"><div><small>Fluxo da oficina</small><h2>Etapas do processo</h2></div></div><ol id="processList" class="process-list"></ol></section>
+        </div>
+      </section>
+
+      <section class="view" data-panel="clients">
+        <div class="toolbar"><div class="search"><input id="clientSearch" placeholder="Buscar por nome ou telefone"></div><button class="btn orange" id="newClient">+ NOVO CLIENTE</button></div>
+        <section class="panel" id="clientFormPanel" hidden>
+          <div class="panel-head"><div><small>Cadastro</small><h2 id="clientFormTitle">Novo cliente</h2></div><button class="btn" id="closeClient">Fechar</button></div>
+          <form class="form-grid" id="clientForm">
+            <input id="clientId" type="hidden">
+            <label>Nome<input id="clientName" maxlength="120" required></label>
+            <label>WhatsApp<input id="clientPhone" inputmode="tel" maxlength="20" required placeholder="67999999999"></label>
+            <div class="actions full"><button class="btn orange" type="submit">SALVAR CLIENTE</button><button class="btn" type="button" id="cancelClient">Cancelar</button></div>
+          </form>
+        </section>
+        <section class="panel" style="margin-top:16px"><div class="panel-head"><div><small>Cadastro e histórico</small><h2>Clientes</h2></div><strong id="clientCount">0</strong></div><div id="clientsList" class="list"></div></section>
+      </section>
+
+      <section class="view" data-panel="orders">
+        <div class="toolbar"><div class="search"><input id="orderSearch" placeholder="Buscar por código, cliente ou serviço"></div><button class="btn orange" id="newOrder">+ NOVA ORDEM</button></div>
+        <section class="panel" id="orderFormPanel" hidden>
+          <div class="panel-head"><div><small>Nova ordem</small><h2>Criar código de rastreio</h2></div><button class="btn" id="closeOrder">Fechar</button></div>
+          <form class="form-grid" id="orderForm">
+            <label>Cliente<select id="orderClient" required><option value="">Selecione</option></select></label>
+            <label>Tipo de serviço<select id="orderType" required><option value="">Selecione</option><option>Portão</option><option>Cobertura</option><option>Mezanino</option><option>Escada</option><option>Móvel Industrial</option><option>Grade</option><option>Corrimão</option><option>Estrutura Metálica</option><option>Outro</option></select></label>
+            <label class="full">Descrição do pedido<input id="orderTitle" maxlength="160" required placeholder="Ex.: Portão basculante 3x2m"></label>
+            <label class="full">Observações<textarea id="orderDescription" maxlength="1200"></textarea></label>
+            <label>Previsão de entrega<input id="orderForecast" type="date"></label>
+            <div class="actions full"><button class="btn orange" type="submit">CRIAR ORDEM E GERAR CÓDIGO</button><button class="btn" type="button" id="cancelOrder">Cancelar</button></div>
+          </form>
+        </section>
+        <section class="panel" style="margin-top:16px"><div class="panel-head"><div><small>Produção</small><h2>Pedidos / Ordens de serviço</h2></div><strong id="orderCount">0</strong></div><div id="ordersList" class="list"></div></section>
+      </section>
+
+      <section class="view" data-panel="settings">
+        <div class="settings">
+          <section class="panel"><div class="panel-head"><div><small>Acesso</small><h2>Alterar usuário</h2></div></div><form class="form-grid" id="usernameForm"><label class="full">Novo usuário<input id="newUsername" maxlength="32" required></label><button class="btn orange" type="submit">SALVAR USUÁRIO</button></form></section>
+          <section class="panel"><div class="panel-head"><div><small>Segurança</small><h2>Alterar senha</h2></div></div><form class="form-grid" id="passwordForm"><label class="full">Nova senha<input id="newPassword" type="password" minlength="8" required></label><label class="full">Confirmar senha<input id="confirmPassword" type="password" minlength="8" required></label><button class="btn orange" type="submit">TROCAR SENHA</button></form></section>
+          <section class="panel wide"><div class="panel-head"><div><small>Sessão</small><h2>Sair do painel</h2></div></div><div class="actions"><button class="btn danger" id="logoutSettings">ENCERRAR SESSÃO</button><a class="btn" href="../index.html" style="text-decoration:none">VOLTAR AO SITE</a></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+</section>
+
+<div id="globalMessage" class="global" aria-live="polite"></div>
+
+<script>
+(()=>{
+'use strict';
+
+/* Configuração pública do projeto. NÃO existe secret/service_role nesta página. */
+const SUPABASE_URL='https://ipglkwryabspwrbrezlx.supabase.co';
+const PUBLISHABLE_KEY='sb_publishable_T6FJksZ09t0trG9GCIO72A_k7qs1Ru2';
+const ADMIN_EMAIL='mcrserralheriabr@gmail.com';
+const SESSION_KEY='mcr_admin_session_v3';
+
+const $=id=>document.getElementById(id);
+const loginView=$('loginView'),app=$('app'),connection=$('connection'),connectionText=$('connectionText');
+let state={session:null,profile:null,clients:[],orders:[]};
+
+const stages=[
+ {title:'Medição e Projeto Aprovado',short:'Projeto',icon:'📐'},
+ {title:'Corte e Separação de Peças',short:'Corte',icon:'✂️'},
+ {title:'Montagem e Soldagem Geral',short:'Solda',icon:'🛠️'},
+ {title:'Esmerilhamento e Tratamento Superficial',short:'Tratamento',icon:'🧹'},
+ {title:'Pintura e Acabamento Final',short:'Pintura',icon:'🎨'},
+ {title:'Pronto para Entrega / Instalação',short:'Entrega',icon:'🚛'}
+];
+
+function saveSession(s){state.session=s||null;if(s)localStorage.setItem(SESSION_KEY,JSON.stringify(s));else localStorage.removeItem(SESSION_KEY)}
+function loadSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{return null}}
+function headers(auth=false,extra={}){
+ const h={'apikey':PUBLISHABLE_KEY,'Content-Type':'application/json',...extra};
+ if(auth&&state.session?.access_token)h.Authorization='Bearer '+state.session.access_token;
+ return h;
+}
+async function errorFrom(r){
+ let j=null;try{j=await r.json()}catch{}
+ const e=new Error(j?.msg||j?.message||j?.error_description||j?.error||('HTTP '+r.status));
+ e.status=r.status;e.code=j?.code||j?.error_code||'';e.data=j;return e
+}
+async function raw(path,opt={},auth=false,retry=true){
+ if(auth)await ensureSession();
+ const r=await fetch(SUPABASE_URL+path,{...opt,headers:headers(auth,opt.headers||{})});
+ if(r.status===401&&auth&&retry&&state.session?.refresh_token){
+   const ok=await refreshSession().catch(()=>null);if(ok)return raw(path,opt,auth,false)
+ }
+ if(!r.ok)throw await errorFrom(r);
+ if(r.status===204)return null;
+ const t=await r.text();return t?JSON.parse(t):null
+}
+async function refreshSession(){
+ if(!state.session?.refresh_token)return null;
+ const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:headers(),body:JSON.stringify({refresh_token:state.session.refresh_token})});
+ if(!r.ok){saveSession(null);throw await errorFrom(r)}
+ const s=await r.json();saveSession(s);return s
+}
+async function ensureSession(){
+ if(!state.session?.access_token)throw new Error('AUTH_REQUIRED');
+ if(state.session.expires_at&&Number(state.session.expires_at)*1000<Date.now()+30000)await refreshSession();
+}
+async function healthCheck(){
+ try{
+   const r=await fetch(SUPABASE_URL+'/auth/v1/settings',{headers:{apikey:PUBLISHABLE_KEY}});
+   if(!r.ok)throw await errorFrom(r);
+   connection.className='connection ok';connectionText.textContent='Banco conectado e pronto para autenticação.';
+   return true
+ }catch(e){
+   console.error('Health check:',e);
+   connection.className='connection error';
+   connectionText.textContent='Não foi possível alcançar o Supabase. Verifique internet, domínio ou chave pública.';
+   return false
+ }
+}
+async function getProfile(){
+ if(!state.session?.user?.id)return null;
+ const rows=await raw('/rest/v1/admin_profiles?id=eq.'+encodeURIComponent(state.session.user.id)+'&select=id,username&limit=1',{method:'GET'},true);
+ return Array.isArray(rows)?rows[0]||null:rows||null
+}
+async function resolveEmail(username){
+ const u=String(username||'').trim();
+ if(u.toLowerCase()==='admin')return ADMIN_EMAIL;
+ try{
+   const rows=await raw('/rest/v1/rpc/resolve_admin_email',{method:'POST',body:JSON.stringify({p_username:u})},false);
+   return Array.isArray(rows)?rows[0]?.email||null:rows?.email||rows||null
+ }catch(e){console.warn('Falha ao resolver usuário por RPC:',e);return null}
+}
+async function signIn(username,password){
+ const email=await resolveEmail(username);
+ if(!email)throw new Error('INVALID_LOGIN');
+ const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:headers(),body:JSON.stringify({email,password:String(password)})});
+ if(!r.ok)throw await errorFrom(r);
+ const s=await r.json();saveSession(s);
+ const p=await getProfile();
+ if(!p){saveSession(null);const e=new Error('PROFILE_MISSING');e.code='PROFILE_MISSING';throw e}
+ state.profile=p;return p
+}
+async function signOut(){
+ if(state.session?.access_token){try{await raw('/auth/v1/logout',{method:'POST'},true,false)}catch{}}
+ saveSession(null);state.profile=null
+}
+
+async function requestPasswordRecovery(){
+ const redirectTo=location.origin+location.pathname;
+ const r=await fetch(SUPABASE_URL+'/auth/v1/recover?redirect_to='+encodeURIComponent(redirectTo),{
+   method:'POST',
+   headers:headers(),
+   body:JSON.stringify({email:ADMIN_EMAIL})
+ });
+ if(!r.ok)throw await errorFrom(r);
+ return true
+}
+function hashParams(){
+ return new URLSearchParams(location.hash.replace(/^#/,''));
+}
+function recoveryPayload(){
+ const h=hashParams();
+ const error=h.get('error');
+ const errorCode=h.get('error_code');
+ const errorDescription=h.get('error_description');
+ if(error||errorCode)return {error:errorCode||error,description:errorDescription||'Link de recuperação inválido.'};
+ const type=h.get('type');
+ const access_token=h.get('access_token');
+ const refresh_token=h.get('refresh_token');
+ if(type==='recovery'&&access_token)return {access_token,refresh_token,type};
+ return null
+}
+function showRecovery(payload){
+ $('normalLogin').hidden=true;
+ $('recoveryBox').classList.add('active');
+ if(payload?.error){
+   $('recoveryInfo').textContent=payload.description||'Este link expirou ou já foi utilizado. Solicite um novo link de recuperação.';
+   $('recoveryForm').hidden=true;
+   $('recoveryMessage').className='login-message error';
+   $('recoveryMessage').innerHTML='';
+   const btn=document.createElement('button');
+   btn.type='button';btn.className='primary';btn.textContent='ENVIAR NOVO LINK';
+   btn.onclick=async()=>{
+     btn.disabled=true;btn.textContent='ENVIANDO...';
+     try{
+       await requestPasswordRecovery();
+       $('recoveryInfo').textContent='Novo link enviado para '+ADMIN_EMAIL+'. Abra o e-mail mais recente.';
+       btn.textContent='LINK ENVIADO';
+     }catch(e){
+       console.error(e);$('recoveryInfo').textContent='Não foi possível enviar um novo link: '+e.message;btn.disabled=false;btn.textContent='TENTAR NOVAMENTE';
+     }
+   };
+   $('recoveryMessage').appendChild(btn);
+   return;
+ }
+ $('recoveryForm').hidden=false;
+ $('recoveryInfo').textContent='Link de recuperação validado. Defina agora sua nova senha.';
+}
+async function saveRecoveredPassword(newPassword,accessToken,refreshToken){
+ const r=await fetch(SUPABASE_URL+'/auth/v1/user',{
+   method:'PUT',
+   headers:{
+     'apikey':PUBLISHABLE_KEY,
+     'Authorization':'Bearer '+accessToken,
+     'Content-Type':'application/json'
+   },
+   body:JSON.stringify({password:String(newPassword)})
+ });
+ if(!r.ok)throw await errorFrom(r);
+ if(refreshToken){
+   saveSession({access_token:accessToken,refresh_token:refreshToken,user:await r.json().catch(()=>null)});
+ }
+ return true
+}
+async function listClients(){return await raw('/rest/v1/clients?select=id,name,phone,created_at,updated_at&order=name.asc',{method:'GET'},true)||[]}
+async function listOrders(){
+ const sel=encodeURIComponent('id,client_id,tracking_code,service_type,title,description,forecast_date,completed_stage,created_at,updated_at,clients(id,name,phone)');
+ return await raw('/rest/v1/service_orders?select='+sel+'&order=updated_at.desc',{method:'GET'},true)||[]
+}
+function cleanPhone(v){return String(v||'').replace(/\D/g,'')}
+async function saveClient(p){
+ const body={name:String(p.name||'').trim(),phone:cleanPhone(p.phone),updated_at:new Date().toISOString()};
+ if(p.id){
+   const d=await raw('/rest/v1/clients?id=eq.'+encodeURIComponent(p.id)+'&select=id,name,phone,created_at,updated_at',{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify(body)},true);
+   return d?.[0]
+ }
+ const d=await raw('/rest/v1/clients?select=id,name,phone,created_at,updated_at',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify(body)},true);
+ return d?.[0]
+}
+async function deleteClient(id){return raw('/rest/v1/clients?id=eq.'+encodeURIComponent(id),{method:'DELETE'},true)}
+function trackingCode(){
+ const a=new Uint32Array(1);crypto.getRandomValues(a);return 'MCR-'+String(a[0]%10000).padStart(4,'0')
+}
+async function createOrder(p){
+ const base={client_id:p.clientId,service_type:p.serviceType,title:p.title,description:p.description||null,forecast_date:p.forecast||null,completed_stage:0,updated_at:new Date().toISOString()};
+ let last;
+ for(let i=0;i<12;i++){
+   try{
+     const d=await raw('/rest/v1/service_orders?select=id,client_id,tracking_code,service_type,title,description,forecast_date,completed_stage,created_at,updated_at',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({...base,tracking_code:trackingCode()})},true);
+     return d?.[0]
+   }catch(e){last=e;if(e.code!=='23505')break}
+ }
+ throw last||new Error('TRACKING_CODE_ERROR')
+}
+async function updateOrder(id,patch){
+ const b={updated_at:new Date().toISOString()};
+ if(patch.completed_stage!==undefined)b.completed_stage=Math.max(0,Math.min(6,Number(patch.completed_stage)||0));
+ if(patch.forecast_date!==undefined)b.forecast_date=patch.forecast_date||null;
+ const d=await raw('/rest/v1/service_orders?id=eq.'+encodeURIComponent(id)+'&select=id,client_id,tracking_code,service_type,title,description,forecast_date,completed_stage,created_at,updated_at',{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify(b)},true);
+ return d?.[0]
+}
+async function deleteOrder(id){return raw('/rest/v1/service_orders?id=eq.'+encodeURIComponent(id),{method:'DELETE'},true)}
+async function updateUsername(v){
+ const clean=String(v||'').trim();
+ if(!/^[A-Za-z0-9._-]{3,32}$/.test(clean))throw new Error('INVALID_USERNAME');
+ const d=await raw('/rest/v1/admin_profiles?id=eq.'+encodeURIComponent(state.session.user.id)+'&select=id,username',{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify({username:clean,updated_at:new Date().toISOString()})},true);
+ return d?.[0]
+}
+async function updatePassword(v){
+ return raw('/auth/v1/user',{method:'PUT',body:JSON.stringify({password:String(v)})},true)
+}
+
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function digits(v){return String(v||'').replace(/\D/g,'')}
+function phone(v){const d=digits(v);return d.length===11?'('+d.slice(0,2)+') '+d.slice(2,7)+'-'+d.slice(7):d}
+function date(v){if(!v)return'A definir';const d=new Date(v);return Number.isNaN(d)?String(v):new Intl.DateTimeFormat('pt-BR',{dateStyle:'short'}).format(d)}
+function status(o){const n=Number(o.completed_stage)||0;if(n>=6)return['Pronto / Entregue','done'];if(n===4)return['Pintura / Acabamento','paint'];return[stages[n]?.short||'Em andamento','progress']}
+function globalMsg(text,type=''){const e=$('globalMessage');e.textContent=text;e.className='global show '+type;clearTimeout(globalMsg.t);globalMsg.t=setTimeout(()=>e.className='global',4200)}
+function showApp(on){loginView.hidden=on;app.hidden=!on}
+function switchView(name){
+ document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
+ document.querySelectorAll('[data-panel]').forEach(p=>p.classList.toggle('active',p.dataset.panel===name));
+ $('viewTitle').textContent={overview:'Visão Geral',clients:'Clientes',orders:'Pedidos / Ordens de Serviço',settings:'Configurações'}[name]||'Painel';
+ $('sidebar').classList.remove('mobile')
+}
+async function refresh(){
+ [state.clients,state.orders]=await Promise.all([listClients(),listOrders()]);
+ render()
+}
+function render(){
+ $('statClients').textContent=state.clients.length;
+ const active=state.orders.filter(o=>Number(o.completed_stage)<6);
+ $('statActive').textContent=active.length;$('statWeld').textContent=active.filter(o=>Number(o.completed_stage)===2).length;$('statPaint').textContent=active.filter(o=>Number(o.completed_stage)===4).length;
+ renderProcess();renderRecent();renderClients();renderOrders();fillClients()
+}
+function renderProcess(){
+ $('processList').innerHTML=stages.map((s,i)=>'<li><span>'+String(i+1).padStart(2,'0')+'</span><div><strong>'+esc(s.title)+' '+s.icon+'</strong><small>'+esc(s.short)+'</small></div><b>'+state.orders.filter(o=>Number(o.completed_stage)===i).length+'</b></li>').join('')
+}
+function orderCard(o,compact=false){
+ const c=o.clients||{};const [st,cl]=status(o);
+ if(compact)return '<article class="row-card"><div class="row-top"><div><h3>'+esc(o.tracking_code)+' · '+esc(o.title)+'</h3><p>'+esc(c.name||'Cliente')+'</p></div><span class="tag '+cl+'">'+esc(st)+'</span></div></article>';
+ const n=Number(o.completed_stage)||0;
+ const stagesHtml=stages.map((s,i)=>'<div class="stage '+(i<n?'completed':i===n&&n<6?'current':'')+'">'+(i+1)+'. '+esc(s.short)+'</div>').join('');
+ const wa=digits(c.phone);const waLink=wa?'https://wa.me/55'+(wa.startsWith('55')?wa.slice(2):wa)+'?text='+encodeURIComponent('Olá! O código de acompanhamento do seu serviço é '+o.tracking_code+'. Acesse: https://mcrserralheria.site/clientes.html?codigo='+o.tracking_code):'#';
+ return '<article class="row-card" data-order="'+esc(o.id)+'"><div class="row-top"><div><h3>'+esc(o.tracking_code)+' · '+esc(o.title)+'</h3><p>'+esc(c.name||'Cliente')+' · '+esc(o.service_type)+'</p></div><span class="tag '+cl+'">'+esc(st)+'</span></div><div class="meta"><span>Previsão: '+esc(date(o.forecast_date))+'</span><span>Etapa concluída: '+n+'/6</span></div><div class="order-stages">'+stagesHtml+'</div><div class="actions">'+(n<6?'<button class="btn orange" data-next="'+esc(o.id)+'">CONCLUIR ETAPA '+(n+1)+'</button>':'')+'<a class="btn" target="_blank" rel="noopener" href="'+waLink+'">WhatsApp</a><button class="btn danger" data-del-order="'+esc(o.id)+'">Excluir</button></div></article>'
+}
+function renderRecent(){$('recentOrders').innerHTML=state.orders.length?state.orders.slice(0,5).map(o=>orderCard(o,true)).join(''):'<div class="empty">Nenhum pedido cadastrado.</div>'}
+function renderClients(){
+ const q=$('clientSearch').value.toLowerCase().trim();
+ const arr=state.clients.filter(c=>(c.name+' '+c.phone).toLowerCase().includes(q));
+ $('clientCount').textContent=arr.length;
+ $('clientsList').innerHTML=arr.length?arr.map(c=>{
+   const count=state.orders.filter(o=>o.client_id===c.id).length,wa=digits(c.phone);
+   const link='https://wa.me/55'+(wa.startsWith('55')?wa.slice(2):wa);
+   return '<article class="row-card"><div class="row-top"><div><h3>'+esc(c.name)+'</h3><p>'+esc(phone(c.phone))+' · '+count+' pedido(s)</p></div></div><div class="actions"><a class="btn" target="_blank" rel="noopener" href="'+link+'">WhatsApp</a><button class="btn" data-edit-client="'+esc(c.id)+'">Editar</button><button class="btn danger" data-del-client="'+esc(c.id)+'">Excluir</button></div></article>'
+ }).join(''):'<div class="empty">Nenhum cliente encontrado.</div>'
+}
+function renderOrders(){
+ const q=$('orderSearch').value.toLowerCase().trim();
+ const arr=state.orders.filter(o=>((o.tracking_code||'')+' '+(o.title||'')+' '+(o.service_type||'')+' '+(o.clients?.name||'')).toLowerCase().includes(q));
+ $('orderCount').textContent=arr.length;$('ordersList').innerHTML=arr.length?arr.map(o=>orderCard(o)).join(''):'<div class="empty">Nenhuma ordem encontrada.</div>'
+}
+function fillClients(){$('orderClient').innerHTML='<option value="">Selecione</option>'+state.clients.map(c=>'<option value="'+esc(c.id)+'">'+esc(c.name)+'</option>').join('')}
+
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
+$('sideToggle').onclick=()=>$('sidebar').classList.toggle('collapsed');
+$('mobileMenu').onclick=()=>$('sidebar').classList.toggle('mobile');
+$('togglePassword').onclick=()=>{const p=$('password');p.type=p.type==='password'?'text':'password';$('togglePassword').textContent=p.type==='password'?'MOSTRAR':'OCULTAR'};
+$('clientSearch').oninput=renderClients;$('orderSearch').oninput=renderOrders;
+
+$('newClient').onclick=()=>{$('clientForm').reset();$('clientId').value='';$('clientFormTitle').textContent='Novo cliente';$('clientFormPanel').hidden=false};
+$('closeClient').onclick=$('cancelClient').onclick=()=>{$('clientFormPanel').hidden=true};
+$('newOrder').onclick=()=>{$('orderForm').reset();fillClients();$('orderFormPanel').hidden=false};
+$('closeOrder').onclick=$('cancelOrder').onclick=()=>{$('orderFormPanel').hidden=true};
+
+
+$('forgotPassword').onclick=async()=>{
+ const btn=$('forgotPassword'),msg=$('loginMessage');
+ btn.disabled=true;msg.className='login-message';msg.textContent='Enviando link de recuperação...';
+ try{
+   await requestPasswordRecovery();
+   msg.className='login-message ok';
+   msg.textContent='Link enviado para '+ADMIN_EMAIL+'. Abra o e-mail mais recente e clique em “Redefinir senha”.';
+ }catch(err){
+   console.error(err);msg.className='login-message error';
+   msg.textContent='Não foi possível enviar o link: '+err.message;
+ }finally{btn.disabled=false}
+};
+
+$('recoveryForm').onsubmit=async e=>{
+ e.preventDefault();
+ const a=$('recoveryPassword').value,b=$('recoveryConfirm').value;
+ const msg=$('recoveryMessage'),btn=$('recoveryButton'),payload=recoveryPayload();
+ msg.className='login-message';msg.textContent='';
+ if(a.length<8){msg.className='login-message error';msg.textContent='Use uma senha com pelo menos 8 caracteres.';return}
+ if(a!==b){msg.className='login-message error';msg.textContent='As senhas não coincidem.';return}
+ if(!payload?.access_token){msg.className='login-message error';msg.textContent='O link de recuperação não é mais válido. Solicite um novo link.';return}
+ btn.disabled=true;btn.textContent='SALVANDO...';
+ try{
+   await saveRecoveredPassword(a,payload.access_token,payload.refresh_token);
+   msg.className='login-message ok';msg.textContent='Senha alterada com sucesso. Você já pode entrar com a nova senha.';
+   history.replaceState(null,'',location.pathname);
+   setTimeout(()=>{
+     $('recoveryBox').classList.remove('active');$('normalLogin').hidden=false;
+     $('password').value='';$('loginMessage').className='login-message ok';
+     $('loginMessage').textContent='Senha atualizada. Entre com a nova senha.';
+     $('password').focus();
+   },1400);
+ }catch(err){
+   console.error(err);msg.className='login-message error';
+   msg.textContent=err.status===401?'Este link expirou. Solicite um novo link de recuperação.':'Não foi possível alterar a senha: '+err.message;
+ }finally{btn.disabled=false;btn.textContent='SALVAR NOVA SENHA'}
+};
+
+$('loginForm').onsubmit=async e=>{
+ e.preventDefault();const btn=$('loginButton'),msg=$('loginMessage');msg.className='login-message';msg.textContent='';btn.disabled=true;btn.textContent='ENTRANDO...';
+ try{
+   await signIn($('username').value,$('password').value);
+   msg.textContent='Acesso autorizado.';msg.className='login-message ok';
+   $('currentUser').textContent=state.profile.username;$('newUsername').value=state.profile.username;
+   await refresh();showApp(true)
+ }catch(err){
+   console.error(err);msg.className='login-message error';
+   if(err.code==='PROFILE_MISSING'||err.message==='PROFILE_MISSING')msg.textContent='A senha foi aceita, mas o perfil administrador não existe. Execute novamente o SQL de configuração no Supabase.';
+   else if(err.status===400||/invalid login|invalid credentials/i.test(err.message))msg.textContent='Usuário ou senha incorretos. Use o usuário admin e a senha cadastrada em Authentication → Users.';
+   else if(err.status===401)msg.textContent='A chave pública ou a sessão foi recusada pelo Supabase.';
+   else msg.textContent='Falha no login: '+err.message;
+ }finally{btn.disabled=false;btn.textContent='ENTRAR'}
+};
+
+$('clientForm').onsubmit=async e=>{
+ e.preventDefault();
+ try{await saveClient({id:$('clientId').value||null,name:$('clientName').value,phone:$('clientPhone').value});$('clientFormPanel').hidden=true;await refresh();globalMsg('Cliente salvo.','ok')}
+ catch(err){console.error(err);globalMsg('Não foi possível salvar o cliente: '+err.message,'error')}
+};
+$('orderForm').onsubmit=async e=>{
+ e.preventDefault();
+ try{const o=await createOrder({clientId:$('orderClient').value,serviceType:$('orderType').value,title:$('orderTitle').value,description:$('orderDescription').value,forecast:$('orderForecast').value});$('orderFormPanel').hidden=true;await refresh();globalMsg('Ordem criada. Código: '+o.tracking_code,'ok')}
+ catch(err){console.error(err);globalMsg('Não foi possível criar a ordem: '+err.message,'error')}
+};
+$('clientsList').onclick=async e=>{
+ const edit=e.target.closest('[data-edit-client]'),del=e.target.closest('[data-del-client]');
+ if(edit){const c=state.clients.find(x=>x.id===edit.dataset.editClient);if(c){$('clientId').value=c.id;$('clientName').value=c.name;$('clientPhone').value=c.phone;$('clientFormTitle').textContent='Editar cliente';$('clientFormPanel').hidden=false;scrollTo({top:0,behavior:'smooth'})}}
+ if(del&&confirm('Excluir este cliente? Os pedidos vinculados também serão excluídos.')){try{await deleteClient(del.dataset.delClient);await refresh();globalMsg('Cliente excluído.','ok')}catch(err){globalMsg('Erro ao excluir: '+err.message,'error')}}
+};
+$('ordersList').onclick=async e=>{
+ const next=e.target.closest('[data-next]'),del=e.target.closest('[data-del-order]');
+ if(next){const o=state.orders.find(x=>x.id===next.dataset.next);if(o)try{await updateOrder(o.id,{completed_stage:Math.min(6,Number(o.completed_stage)+1)});await refresh();globalMsg('Etapa concluída.','ok')}catch(err){globalMsg('Erro ao atualizar: '+err.message,'error')}}
+ if(del&&confirm('Excluir esta ordem de serviço?'))try{await deleteOrder(del.dataset.delOrder);await refresh();globalMsg('Ordem excluída.','ok')}catch(err){globalMsg('Erro ao excluir: '+err.message,'error')}
+};
+$('usernameForm').onsubmit=async e=>{
+ e.preventDefault();try{state.profile=await updateUsername($('newUsername').value);$('currentUser').textContent=state.profile.username;globalMsg('Usuário atualizado.','ok')}catch(err){globalMsg('Não foi possível alterar o usuário: '+err.message,'error')}
+};
+$('passwordForm').onsubmit=async e=>{
+ e.preventDefault();const a=$('newPassword').value,b=$('confirmPassword').value;if(a!==b)return globalMsg('As senhas não coincidem.','error');if(a.length<8)return globalMsg('Use pelo menos 8 caracteres.','error');
+ try{await updatePassword(a);e.target.reset();globalMsg('Senha alterada com sucesso.','ok')}catch(err){globalMsg('Não foi possível alterar a senha: '+err.message,'error')}
+};
+async function logout(){await signOut();showApp(false);$('recoveryBox').classList.remove('active');$('normalLogin').hidden=false;$('password').value='';$('loginMessage').textContent='Sessão encerrada.'}
+$('logoutSide').onclick=logout;$('logoutSettings').onclick=logout;
+
+(async()=>{
+ await healthCheck();
+
+ const recovery=recoveryPayload();
+ if(recovery){
+   showApp(false);
+   showRecovery(recovery);
+   return;
+ }
+
+ state.session=loadSession();
+ if(state.session){
+   try{await ensureSession();state.profile=await getProfile();if(state.profile){$('currentUser').textContent=state.profile.username;$('newUsername').value=state.profile.username;await refresh();showApp(true);return}}
+   catch(e){console.warn('Sessão antiga inválida:',e);saveSession(null)}
+ }
+ showApp(false)
+})();
+})();
+</script>
+</body>
+</html>
