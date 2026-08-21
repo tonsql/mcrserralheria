@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const WHATSAPP = '5567998401792';
+  const WHATSAPP = '5567981036563';
 
   function openWhatsApp(message){
     const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
