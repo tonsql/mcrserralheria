@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
-<defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#111315"/><stop offset="1" stop-color="#292d31"/></linearGradient><pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#777" opacity=".25"/></pattern></defs>
-<rect width="1200" height="800" fill="url(#g)"/><rect width="1200" height="800" fill="url(#p)"/>
-<g fill="none" stroke="#ff7a00" stroke-width="8" opacity=".7"><path d="M180 560V240h150l150 150 150-150h150v320"/><rect x="820" y="260" width="180" height="300"/></g>
-<g font-family="Arial" text-anchor="middle"><text x="600" y="660" font-size="42" fill="#eef0f2" font-weight="700">SUBSTITUA PELA FOTO DO SERVIÇO</text><text x="600" y="710" font-size="24" fill="#aeb3b7">MCR SERRALHERIA</text></g>
-</svg>
