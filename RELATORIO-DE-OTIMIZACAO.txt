@@ -1,0 +1,46 @@
+MCR SERRALHERIA — RELATÓRIO DE ALTERAÇÕES E OTIMIZAÇÃO
+
+ALTERAÇÕES VISUAIS
+- Logo da página inicial reduzida em 3 px nas versões desktop, tablet e celular.
+- Ícones do Instagram e WhatsApp posicionados no extremo direito do cabeçalho.
+- Tag “Projetos feitos para durar” recebeu brilho neon/faísca minimalista.
+- Texto explicativo do Hero recebeu a mesma família tipográfica de “Feito sob medida”.
+- Painel de animação técnica deslocado 6 px para a direita.
+- Subtítulo dos serviços alterado para abranger trabalhos de solda e serralheria.
+- Cartões de serviços mais procurados receberam cantos arredondados e melhor acabamento.
+- Rodapé da página inicial simplificado, com ícones de WhatsApp, Instagram e Gmail.
+- Área “Veja nosso trabalho na prática” recebeu conteúdo definitivo e instruções técnicas foram retiradas da tela.
+
+OTIMIZAÇÕES DE CÓDIGO
+- Removidas regras CSS legadas de hero-frame, cartões de diferenciais e toast que não possuíam elementos correspondentes no projeto.
+- Removidas referências responsivas dessas estruturas antigas.
+- Removidos atributos class vazios dos arquivos HTML.
+- Mantidos todos os arquivos de imagem, vídeo e documentação que ainda têm utilidade no projeto.
+
+ARQUIVOS MANTIDOS E FUNÇÃO
+- index.html: página inicial.
+- servicos.html: catálogo e vídeo dos serviços.
+- sobre.html: apresentação e garantia.
+- contato.html: formulário com redirecionamento para WhatsApp.
+- css/style.css: estilos e animações.
+- js/main.js: menu, formulários, filtros e animações de entrada.
+- img/logo-mcr.svg: logo principal.
+- img/favicon.svg: ícone da aba.
+- img/placeholder-metal.svg: imagem de segurança quando uma foto externa falhar.
+- media/demo-serralheria.mp4: vídeo temporário que será substituído pelo vídeo definitivo.
+- README.md: instruções técnicas do projeto.
+
+CORREÇÃO ADICIONAL — VÍDEO
+- O player agora mantém proporção horizontal 16:9.
+- Removido o esticamento causado pelo painel lateral.
+- object-fit alterado para contain, evitando cortes em textos e elementos do vídeo.
+- Dimensões 1280x720 declaradas no HTML para reduzir mudança de layout durante o carregamento.
+
+REVISAO 21/08/2026
+------------------
+- WhatsApp atualizado em todo o projeto para 5567981036563 ((67) 98103-6563).
+- Fotos repetidas na página de serviços corrigidas.
+- Mezaninos, escadas, manutenção/reparos e pedido personalizado agora usam imagens diferentes e mais coerentes com cada serviço.
+- Descrição de suportes/grades revisada para maior clareza.
+- JavaScript do modal de orçamento ficou mais tolerante a páginas sem todos os elementos do modal.
+- Fallback de imagens agora também cobre imagens que já falharam antes do listener ser registrado.

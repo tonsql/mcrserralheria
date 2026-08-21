@@ -1,0 +1,3 @@
+Coloque aqui as fotos reais dos serviços.
+Exemplos de nomes: portao.jpg, grade.jpg, corrimao.jpg, cobertura.jpg.
+Depois troque os endereços das imagens nos arquivos HTML.
